@@ -1,10 +1,10 @@
-package com.api;
+package com.playground.helpdesk;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class HelpDeskApplicationTests {
 
 	@Test
 	void contextLoads() {
