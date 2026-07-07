@@ -47,4 +47,4 @@ jobs:
           ignore: DL3008
 
       - name: Lint Github Workflows
-        uses: reviewdog/actionlint-action@v1
+        uses: reviewdog/action-actionlint@v1
