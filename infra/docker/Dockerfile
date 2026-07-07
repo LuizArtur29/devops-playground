@@ -18,7 +18,7 @@ RUN mvn clean package -DskipTests
 # ESTÁGIO 2: RUNTIME (Execução segura e otimizada em produção)
 # =========================================================================
 
-FROM gcr.io/distroless/java21-debian12:latest
+FROM gcr.io/distroless/java21-debian12:20260601
 
 WORKDIR /app
 
