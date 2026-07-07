@@ -5,6 +5,8 @@ on:
       - main
     paths:
       - 'backend/**'
+      - 'infra/**'
+      - '.github/workflows/**'
 jobs:
   validate-backend:
     name: Build & Test Application
@@ -30,3 +32,21 @@ jobs:
         run: |
           cd backend
           ./mvnw test
+
+  validate-infra:
+    name: Lint Infrastructure Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: infra/docker/Dockerfile
+          ignore: DL3008
+
+      - name: Lint Github Workflows
+        run: |
+          bash <(curl -shttps://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint
