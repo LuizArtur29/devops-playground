@@ -1,0 +1,32 @@
+name: PR Validation (CI)
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+jobs:
+  validate-backend:
+    name: Build & Test Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribuiton: 'temurin'
+          cache: 'maven'
+
+      - name: Compile and Build Application
+        run: |
+          cd backend
+          ./mvnw clean package -DskipTests
+
+      - name: Run Automated Tests
+        run: |
+          cd backend
+          ./mvnw test
