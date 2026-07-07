@@ -47,6 +47,4 @@ jobs:
           ignore: DL3008
 
       - name: Lint Github Workflows
-        run: |
-          bash <(curl -shttps://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-          ./actionlint
+        uses: rhysd/actionlint-action@v1
