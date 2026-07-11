@@ -8,3 +8,17 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Ignorar arquivos locais do Terraform
+**/.terraform/
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform.lock.hcl
+
+# Ignorar arquivos de variáveis secretas
+**/*.tfvars
+**/*.tfvars.json
+
+# Ignorar logs de erro do Terraform
+**/crash.log
+**/terraform.tfstate.d
