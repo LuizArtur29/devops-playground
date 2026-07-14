@@ -16,9 +16,16 @@ provider "digitalocean" {
   token = var.do_token
 }
 
+resource "digitalocean_ssh_key" "my_key" {
+  name       = "luiz-loq-key"
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDlvtOBzdyfqjrFZD/HtAxsh6OeoBuIQV1/zbUzbhOdu luiz-devops-playground"
+}
+
 resource "digitalocean_droplet" "helpdesk_vm" {
   image = "ubuntu-24-04-x64"
   name = "helpdesk-devops-server"
   region = "nyc1"
   size = "s-1vcpu-2gb"
+
+  ssh_keys = [digitalocean_ssh_key.my_key.id]
 }
