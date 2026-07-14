@@ -6,11 +6,6 @@ terraform {
     }
   }
 }
-variable "do_token" {
-  type = string
-  description = "Token de API da DigitalOcean"
-  sensitive = true
-}
 
 provider "digitalocean" {
   token = var.do_token
@@ -24,8 +19,47 @@ resource "digitalocean_ssh_key" "my_key" {
 resource "digitalocean_droplet" "helpdesk_vm" {
   image = "ubuntu-24-04-x64"
   name = "helpdesk-devops-server"
-  region = "nyc1"
-  size = "s-1vcpu-2gb"
-
+  region = var.region
+  size = var.droplet_size
   ssh_keys = [digitalocean_ssh_key.my_key.id]
+
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update
+              apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+              add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              apt-get update
+              apt-get install -y docker-ce docker-compose-plugin
+              systemctl enable docker
+              systemctl start docker
+              EOF
+}
+
+resource "digitalocean_firewall" "heldesk_fw" {
+  name = "helpdesk-secure-firewall"
+  droplet_ids = [digitalocean_droplet.helpdesk_vm.id]
+  inbound_rule {
+    protocol = "tcp"
+    port_range = "22"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol = "tcp"
+    port_range = "8080"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol = "tcp"
+    port_range = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol = "udp"
+    port_range = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
 }
