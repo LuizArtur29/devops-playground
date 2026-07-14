@@ -64,8 +64,8 @@ services:
     image: helpdesk-api:1.0.0
     container_name: helpdesk-api-app
     build:
-      context: ../backend
-      dockerfile: ../infra/docker/Dockerfile
+      context: backend
+      dockerfile: infra/docker/Dockerfile
     networks:
       - helpdesk-network
     ports:
