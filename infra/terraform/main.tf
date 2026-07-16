@@ -39,15 +39,24 @@ resource "digitalocean_droplet" "helpdesk_vm" {
 resource "digitalocean_firewall" "heldesk_fw" {
   name = "helpdesk-secure-firewall"
   droplet_ids = [digitalocean_droplet.helpdesk_vm.id]
+  # Porta 22 (SSH): Permite que você se conecte para manutenção
   inbound_rule {
     protocol = "tcp"
     port_range = "22"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  # Porta 80 (HTTP): Entrada padrão para o Nginx
   inbound_rule {
     protocol = "tcp"
-    port_range = "8080"
+    port_range = "80"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  # Porta 443 (HTTPS): Entrada segura para o Nginx (Certificado SSL)
+  inbound_rule {
+    protocol = "tcp"
+    port_range = "443"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
