@@ -91,14 +91,14 @@ services:
     networks:
       - helpdesk-net
 
-  networks:
-    helpdesk-net:
-      driver: bridge
+networks:
+  helpdesk-net:
+    driver: bridge
 
-  volumes:
-    postgres_data:
-      driver: local
-    redis_data:
-      driver: local
-    rabbitmq_data:
-      driver: local
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
