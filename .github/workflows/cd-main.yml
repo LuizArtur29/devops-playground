@@ -67,13 +67,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Copy docker-compose to VPS
+      - name: Copy production config to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "infra/production/docker-compose.yml"
+          source: "infra/production/**"
           target: "/app/helpdesk"
           strip_components: 2
 
