@@ -7,6 +7,7 @@ on:
     paths:
       - 'backend/**'
       - 'infra/docker/Dockerfile'
+      - 'infra/production/**'
       - '.github/workflows/**'
 
 jobs:
