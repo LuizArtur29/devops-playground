@@ -52,7 +52,7 @@ services:
     container_name: helpdesk-app-prod
     restart: always
     expose:
-      - "8080:8080"
+      - "8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/helpdesk_db
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
