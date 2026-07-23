@@ -89,6 +89,28 @@ services:
     networks:
       - helpdesk-net
 
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: helpdesk-prometheus-prod
+    restart: always
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - helpdesk-net
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: helpdesk-grafana-prod
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - helpdesk-net
+
 networks:
   helpdesk-net:
     driver: bridge
@@ -99,4 +121,6 @@ volumes:
   redis_data:
     driver: local
   rabbitmq_data:
+    driver: local
+  grafana_data:
     driver: local
