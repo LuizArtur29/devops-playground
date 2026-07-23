@@ -53,12 +53,6 @@ services:
     restart: always
     expose:
       - "8080"
-    healthcheck:
-      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1" ]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-      start_period: 75s
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/helpdesk_db
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
