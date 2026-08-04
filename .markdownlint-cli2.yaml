@@ -1,0 +1,9 @@
+config:
+  default: true
+
+  # Documentos técnicos contêm tabelas, comandos, caminhos e Mermaid.
+  MD013: false
+
+  # Permite títulos iguais quando pertencem a seções diferentes.
+  MD024:
+    siblings_only: true
