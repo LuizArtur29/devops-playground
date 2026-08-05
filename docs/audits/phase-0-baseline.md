@@ -117,9 +117,10 @@ devops-playground/
 │   └── .gitignore
 ├── docs/
 │   ├── adr/
-│   │   └── adr/
-│   │       └── 0001-tech-stack-inicial.md
-│   └── Help Desk System Ecosystem-2026-07-08-140747.png
+│   │   └── 0001-tech-stack-inicial.md
+│   ├── architecture/
+│   │    ├── current-state.md
+│   └──  └── helpdesk-system-ecosystem.png
 ├── infra/
 │   ├── docker/
 │   │   └── Dockerfile
@@ -194,7 +195,7 @@ Esses arquivos podem:
 O ADR atual está localizado em:
 
 ```text
-docs/adr/adr/0001-tech-stack-inicial.md
+docs/adr/0001-tech-stack-inicial.md
 ```
 
 A estrutura esperada seria:
@@ -208,7 +209,7 @@ docs/adr/0001-tech-stack-inicial.md
 O arquivo:
 
 ```text
-docs/Help Desk System Ecosystem-2026-07-08-140747.png
+docs/architecture/helpdesk-system-ecosystem.png
 ```
 
 possui:
