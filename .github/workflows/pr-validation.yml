@@ -47,3 +47,6 @@ jobs:
 
       - name: Lint Github Workflows
         uses: reviewdog/action-actionlint@v1
+
+      - name: Validate Nginx Configuration
+        run: ./scripts/validate-nginx.sh
