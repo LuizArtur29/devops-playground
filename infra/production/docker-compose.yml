@@ -88,6 +88,17 @@ services:
       - ./certbot/www:/var/www/certbot:ro
     depends_on:
       - backend
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --quiet
+        - --spider
+        - http://localhost/nginx-health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     networks:
       - helpdesk-net
 
